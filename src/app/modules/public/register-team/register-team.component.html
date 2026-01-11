@@ -1,0 +1,44 @@
+<h2>Register a New Team</h2>
+
+<form [formGroup]="teamForm" (ngSubmit)="registerTeam()">
+  <label>Team Name:</label>
+  <input formControlName="teamName" />
+
+  <label>Captain Name:</label>
+  <input formControlName="captainName" />
+
+  <label>Contact Number:</label>
+  <input formControlName="contactNumber" />
+
+  <label>Email:</label>
+  <input formControlName="email" />
+
+  <hr />
+  <h3>Players</h3>
+  <div formArrayName="players">
+    <div *ngFor="let player of players.controls; let i = index" [formGroupName]="i">
+      <label>Player {{ i + 1 }} Name:</label>
+      <input formControlName="name" />
+
+      <label>Position:</label>
+      <input formControlName="position" />
+    </div>
+  </div>
+  <button type="button" (click)="addPlayer()">Add Player</button>
+
+  <hr />
+  <h3>Substitutes</h3>
+  <div formArrayName="substitutes">
+    <div *ngFor="let sub of substitutes.controls; let j = index" [formGroupName]="j">
+      <label>Substitute {{ j + 1 }} Name:</label>
+      <input formControlName="name" />
+
+      <label>Position:</label>
+      <input formControlName="position" />
+    </div>
+  </div>
+  <button type="button" (click)="addSubstitute()">Add Substitute</button>
+
+  <hr />
+  <button type="submit">Register Team</button>
+</form>

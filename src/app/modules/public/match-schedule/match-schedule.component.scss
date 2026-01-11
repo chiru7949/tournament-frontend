@@ -1,0 +1,20 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+thead {
+  background-color: #f0f0f0;
+}
+
+input[type="number"] {
+  width: 80px;
+  padding: 4px;
+}

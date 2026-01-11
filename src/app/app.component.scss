@@ -1,1 +1,19 @@
-/* Root styles */
+nav {
+  margin-bottom: 20px;
+}
+
+nav a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.active {
+  color: #dc3545;
+  text-decoration: underline;
+}

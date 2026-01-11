@@ -1,0 +1,28 @@
+<h2>🏐 Pool Assignment</h2>
+
+<div class="pools-container">
+  <div class="pool">
+    <h3>Unassigned Teams</h3>
+    <ul>
+      <li *ngFor="let team of allTeams">
+        {{ team }}
+        <button (click)="assignToPool('A', team)">Pool A</button>
+        <button (click)="assignToPool('B', team)">Pool B</button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="pool">
+    <h3>Pool A</h3>
+    <ul>
+      <li *ngFor="let team of poolA">{{ team }}</li>
+    </ul>
+  </div>
+
+  <div class="pool">
+    <h3>Pool B</h3>
+    <ul>
+      <li *ngFor="let team of poolB">{{ team }}</li>
+    </ul>
+  </div>
+</div>

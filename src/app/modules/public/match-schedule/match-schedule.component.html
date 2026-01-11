@@ -1,0 +1,46 @@
+<h2>📅 First Round Match Schedule</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Team A</th>
+    <th>Captain A</th>
+    <th>Pool</th>
+    <th>Team B</th>
+    <th>Captain B</th>
+    <th>Pool</th>
+    <th>Status</th>
+    <th>Score A</th>
+    <th>Score B</th>
+    <th>Submit</th>
+    <th>Winner</th>
+    <th>Loser</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let match of matches; let i = index">
+    <td>{{ i + 1 }}</td>
+    <td>{{ match.teamA }}</td>
+    <td>{{ match.captainA }}</td>
+    <td>{{ match.poolA }}</td>
+    <td>{{ match.teamB }}</td>
+    <td>{{ match.captainB }}</td>
+    <td>{{ match.poolB }}</td>
+    <td>{{ match.status }}</td>
+    <td>
+      <input type="number" min="0" [value]="match.scoreA || ''" #scoreAInput />
+    </td>
+    <td>
+      <input type="number" min="0" [value]="match.scoreB || ''" #scoreBInput />
+    </td>
+    <td>
+      <button (click)="submitResult(match, +scoreAInput.value, +scoreBInput.value)">
+        Submit Result
+      </button>
+    </td>
+    <td>{{ match.winner || '-' }}</td>
+    <td>{{ match.loser || '-' }}</td>
+  </tr>
+  </tbody>
+</table>
