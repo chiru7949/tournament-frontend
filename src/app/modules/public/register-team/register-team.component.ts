@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';  // 👈 add FormArray here
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FinanceService } from '../../../services/finance.service';
+
 @Component({
   selector: 'app-register-team',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],   // 👈 include here
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './register-team.component.html',
   styleUrls: ['./register-team.component.scss']
 })
 export class RegisterTeamComponent {
   teamForm: FormGroup;
+  entryFee = 500; // set your fee here
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private finance: FinanceService) {
     this.teamForm = this.fb.group({
       teamName: ['', Validators.required],
       captainName: ['', Validators.required],
@@ -23,38 +25,33 @@ export class RegisterTeamComponent {
     });
   }
 
-  get players() {
-    return this.teamForm.get('players') as FormArray;
-  }
-
-  get substitutes() {
-    return this.teamForm.get('substitutes') as FormArray;
-  }
+  get players() { return this.teamForm.get('players') as FormArray; }
+  get substitutes() { return this.teamForm.get('substitutes') as FormArray; }
 
   addPlayer() {
-    this.players.push(
-      this.fb.group({
-        name: ['', Validators.required],
-        position: ['', Validators.required]
-      })
-    );
+    this.players.push(this.fb.group({ name: ['', Validators.required], position: ['', Validators.required] }));
   }
 
   addSubstitute() {
-    this.substitutes.push(
-      this.fb.group({
-        name: [''],
-        position: ['']
-      })
-    );
+    this.substitutes.push(this.fb.group({ name: [''], position: [''] }));
   }
 
   registerTeam() {
-    if (this.teamForm.valid) {
-      console.log('Team registered:', this.teamForm.value);
-      // Save to localStorage or send to backend
-    } else {
-      console.log('Form is invalid');
-    }
+    if (!this.teamForm.valid) return;
+
+    // Save team (later to backend), and record payment
+    const teamName = this.teamForm.value.teamName;
+    this.finance.addPayment({
+      source: 'Team',
+      name: teamName,
+      amount: this.entryFee,
+      date: new Date().toISOString()
+    });
+
+    // Reset form or show success
+    this.teamForm.reset();
+    this.players.clear();
+    this.substitutes.clear();
+    alert(`Team registered and entry fee ₹${this.entryFee} recorded for ${teamName}`);
   }
 }

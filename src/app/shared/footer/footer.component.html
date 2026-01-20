@@ -1,0 +1,14 @@
+<nav class="navbar">
+  <a routerLink="/" routerLinkActive="active">🏠 Home</a>
+  <a routerLink="/teams" routerLinkActive="active">👥 Teams</a>
+  <a routerLink="/schedule" routerLinkActive="active">📅 Schedule</a>
+  <a routerLink="/donations" routerLinkActive="active">🎁 Donations</a>
+  <a routerLink="/finance" routerLinkActive="active">💰 Finance</a>
+
+  <!-- Admin-only links -->
+  <ng-container *ngIf="isAdmin">
+    <a routerLink="/admin-login" routerLinkActive="active">🔐 Admin Login</a>
+    <a routerLink="/expenditure" routerLinkActive="active">📉 Expenditure</a>
+    <a routerLink="/finance-dashboard" routerLinkActive="active">📊 Finance Dashboard</a>
+  </ng-container>
+</nav>

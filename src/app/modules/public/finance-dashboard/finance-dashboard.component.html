@@ -1,0 +1,59 @@
+<h2>💰 Finance Dashboard</h2>
+
+<div class="summary">
+  <p><strong>Total Income:</strong> ₹{{ finance.totalIncome }}</p>
+  <p><strong>Total Expenditure:</strong> ₹{{ finance.totalExpenditure }}</p>
+  <p><strong>Balance:</strong> ₹{{ finance.balance }}</p>
+</div>
+
+<!-- Toggle link -->
+<a href="javascript:void(0)" (click)="toggleDonorList()">
+  {{ showDonorList ? 'Hide Donor List' : 'View Donor List' }}
+</a>
+
+<!-- Donor list -->
+<div *ngIf="showDonorList">
+  <h3>🧾 Donor List</h3>
+  <table>
+    <thead>
+    <tr>
+      <th>Donor Name</th>
+      <th>Amount</th>
+      <th>Payment Mode</th>
+      <th>To Whom</th>
+      <th>Phone Number</th>
+      <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let p of finance.allPayments">
+      <td>{{ p.name }}</td>
+      <td>₹{{ p.amount }}</td>
+      <td>{{ p.paymentMode || '-' }}</td>
+      <td>{{ p.toWhom || '-' }}</td>
+      <td>{{ p.phoneNumber || '-' }}</td>
+      <td>{{ p.date | date:'short' }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>📉 Expenditures</h3>
+<table>
+  <thead>
+  <tr>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Spent By</th>
+    <th>Date</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let e of finance.allExpenditures">
+    <td>{{ e.description }}</td>
+    <td>₹{{ e.amount }}</td>
+    <td>{{ e.spentBy }}</td>
+    <td>{{ e.date | date:'short' }}</td>
+  </tr>
+  </tbody>
+</table>

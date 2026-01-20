@@ -1,0 +1,66 @@
+<h2>🙏 Donations</h2>
+
+<!-- Constant message -->
+<div class="donation-info">
+  <p>If you want to give a donation, please call <strong>+91 966150405</strong></p>
+  <p>Contact Person: <strong>Chiranjeevi</strong></p>
+  <p>GPay Number: <strong>+91 966150405</strong></p>
+</div>
+
+<!-- Toggle link -->
+<a href="javascript:void(0)" (click)="toggleDonorList()">
+  {{ showDonorList ? 'Hide Donor List' : 'View Donor List' }}
+</a>
+
+<!-- Donor list -->
+<div *ngIf="showDonorList">
+  <h3>🧾 Donor List</h3>
+  <table>
+    <thead>
+    <tr>
+      <th>Donor Name</th>
+      <th>Amount</th>
+      <th>Payment Mode</th>
+      <th>To Whom</th>
+      <th>Phone Number</th>
+      <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let d of finance.allPayments">
+      <td>{{ d.name }}</td>
+      <td>₹{{ d.amount }}</td>
+      <td>{{ d.paymentMode }}</td>
+      <td>{{ d.toWhom }}</td>
+      <td>{{ d.phoneNumber }}</td>
+      <td>{{ d.date | date:'short' }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Donation form -->
+<div *ngIf="!showDonorList">
+  <form [formGroup]="donorForm" (ngSubmit)="addDonation()">
+    <label>Donor Name</label>
+    <input formControlName="name" />
+
+    <label>Amount</label>
+    <input type="number" formControlName="amount" />
+
+    <label>Payment Mode</label>
+    <select formControlName="paymentMode">
+      <option value="">Select</option>
+      <option value="Cash">Cash</option>
+      <option value="UPI">UPI</option>
+    </select>
+
+    <label>To Whom</label>
+    <input formControlName="toWhom" />
+
+    <label>Phone Number</label>
+    <input type="text" formControlName="phoneNumber" />
+
+    <button type="submit">Add Donation</button>
+  </form>
+</div>

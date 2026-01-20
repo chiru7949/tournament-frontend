@@ -1,0 +1,6 @@
+<h2>Welcome to the Tournament Platform</h2>
+
+<!-- Show login option if not already admin -->
+<div *ngIf="!auth.isAdmin()">
+  <a routerLink="/admin-login" class="btn btn-primary">🔐 Admin Login</a>
+</div>

@@ -1,15 +1,19 @@
-<h1>{{ title }}</h1>
+<nav class="navbar">
+  <!-- Public links -->
+  <a routerLink="/" routerLinkActive="active">🏠 Home</a>
+  <a routerLink="/teams" routerLinkActive="active">👥 Teams</a>
+  <a routerLink="/register-team" routerLinkActive="active">📝 Register Team</a>
+  <a routerLink="/pools" routerLinkActive="active">🏐 Pools</a>
+  <a routerLink="/match-schedule" routerLinkActive="active">📅 Match Schedule</a>
+  <a routerLink="/match-results" routerLinkActive="active">📋 Match Results</a>
+  <a routerLink="/donations" routerLinkActive="active">🎁 Donations</a>
 
-<nav>
-  <a routerLink="/teams" routerLinkActive="active">Teams</a> |
-  <a routerLink="/register-team" routerLinkActive="active">Register Team</a> |
-  <a routerLink="/gallery" routerLinkActive="active">Gallery</a> |
-  <a routerLink="/admin-login" routerLinkActive="active">Admin Login</a> |
-  <a routerLink="/match-results" routerLinkActive="active">Match Results</a> |
-  <a routerLink="/pools" routerLinkActive="active">Pools</a> |
-  <a routerLink="/match-schedule" routerLinkActive="active">Match Schedule</a>
+  <!-- Admin-only links -->
+  <ng-container *ngIf="auth.isAdmin()">
+    <a routerLink="/admin-login" routerLinkActive="active">🔐 Admin Login</a>
+  </ng-container>
 </nav>
 
-<hr />
-
 <router-outlet></router-outlet>
+
+<app-footer></app-footer>

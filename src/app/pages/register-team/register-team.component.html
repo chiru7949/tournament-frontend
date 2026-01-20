@@ -1,0 +1,22 @@
+<h2>Register Your Team</h2>
+
+<div *ngIf="!submitted || isAdmin">
+  <form (ngSubmit)="submitForm()">
+    <label>Team Name:</label>
+    <input [(ngModel)]="teamName" name="teamName" required />
+
+    <label>Players (comma-separated):</label>
+    <textarea [(ngModel)]="players" name="players" required></textarea>
+
+    <button type="submit" [disabled]="submitted && !isAdmin">Submit</button>
+  </form>
+</div>
+
+<div *ngIf="submitted && !isAdmin">
+  <p>✅ Your team has been registered. You cannot edit it again.</p>
+</div>
+
+<div *ngIf="isAdmin && submitted">
+  <p>🛠️ Admin view: You can reset and re-edit.</p>
+  <button (click)="resetForm()">Reset Form</button>
+</div>

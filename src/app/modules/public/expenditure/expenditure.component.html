@@ -1,0 +1,11 @@
+<p>expenditure works!</p>
+<h2>🧾 Admin Expenditure</h2>
+<form [formGroup]="expForm" (ngSubmit)="addExpenditure()">
+  <label>Description</label>
+  <input formControlName="description" />
+  <label>Amount</label>
+  <input type="number" formControlName="amount" />
+  <label>Spent By (Admin)</label>
+  <input formControlName="spentBy" />
+  <button type="submit">Add Expenditure</button>
+</form>
