@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                sh 'npm ci'
             }
         }
         stage('Build Angular App') {
@@ -22,6 +22,16 @@ pipeline {
         stage('Archive Build') {
             steps {
                 archiveArtifacts artifacts: 'dist/**', fingerprint: true
+            }
+        }
+        stage('Deploy to Nginx') {
+            steps {
+                // Clean old files
+                sh 'sudo rm -rf /var/www/html/*'
+                // Copy new build
+                sh 'sudo cp -r dist/tournament-frontend/* /var/www/html/'
+                // Restart Nginx
+                sh 'sudo systemctl restart nginx'
             }
         }
     }
