@@ -26,12 +26,9 @@ pipeline {
         }
         stage('Deploy to Nginx') {
             steps {
-                // Clean old files
-                sh 'sudo rm -rf /var/www/html/*'
-                // Copy new build
-                sh 'sudo cp -r dist/tournament-frontend/* /var/www/html/'
-                // Restart Nginx
-                sh 'sudo systemctl restart nginx'
+                sh 'rm -rf /var/www/html/*'
+				sh 'cp -r dist/tournament-frontend/* /var/www/html/'
+
             }
         }
     }
